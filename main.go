@@ -74,7 +74,15 @@ func main() {
 		w.WriteHeader(http.StatusTemporaryRedirect)
 	})
 
+	http.Handle("/upload", &templateHandler{filename: "upload.html"})
+	http.HandleFunc("/uploader", uploaderHandler)
+
 	http.Handle("/room", r)
+
+	// FileServer - will simply serve static files, provide index listings, and
+	// generate the 404 Not Found error if it cannot find the file. The http.Dir function
+	// allows us to specify which folder we want to expose publicly
+	http.Handle("/avatars/", http.StripPrefix("/avatars/", http.FileServer(http.Dir("./avatars"))))
 
 	log.Println("Starting to serve at", *addr)
 

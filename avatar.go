@@ -19,10 +19,10 @@ type Avatar interface {
 }
 
 func (_ GravatarAvatar) GetAvatarURL(c *client) (string, error) {
-	if email, ok := c.userData["email"]; ok {
-		if emailStr, ok := email.(string); ok {
+	if userid, ok := c.userData["userid"]; ok {
+		if useridStr, ok := userid.(string); ok {
 			m := md5.New()                                                      //Gravatar's guidelines to generate an MD5
-			io.WriteString(m, strings.ToLower(emailStr))                        //(after we ensured it was lowercase)
+			io.WriteString(m, strings.ToLower(useridStr))                       //(after we ensured it was lowercase)
 			return fmt.Sprintf("//www.gravatar.com/avatar/%x", m.Sum(nil)), nil //append it to the hardcoded
 			// base URL
 
