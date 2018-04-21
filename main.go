@@ -46,7 +46,6 @@ func main() {
 	var addr = flag.String("addr", ":8000", "Listen at what port?")
 	flag.Parse()
 	gomniauth.SetSecurityKey("ThisMySaltp4$$~0d")
-	// gomniauth.SetSecurityKey("AIzaSyDUIW6z19RPGM7jSnDR3URc0tPa94mXz6A") //AIzaSyDUIW6z19RPGM7jSnDR3URc0tPa94mXz6A
 	gomniauth.WithProviders(
 		facebook.New("key", "secret",
 			"http://localhost:3000/auth/callback/facebook"),

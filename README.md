@@ -6,7 +6,7 @@
 > ./chat --addr=":Serve at what port?"
 > ./chat --addr=":8000"
 ```
-###### Sample output if `r.tracer = trace.New(os.Stdout)`\n
+###### Sample output if `r.tracer = trace.New(os.Stdout)`
 
 `Output here`
 
@@ -24,7 +24,7 @@ upstream websocket {
         proxy_read_timeout 86400s;
         proxy_send_timeout 86400s;
         server_name chatapp.net;
->        listen 3000;
+        > listen 3000;
         location / {
             proxy_pass http://websocket;
             proxy_http_version 1.1;
