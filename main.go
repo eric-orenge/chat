@@ -51,10 +51,10 @@ func main() {
 			"http://localhost:3000/auth/callback/facebook"),
 		github.New("key", "secret",
 			"http://localhost:3000/auth/callback/github"),
-		google.New("", "",
+		google.New("570655466584-r6dovj17fn34v2efophhmn0s9o42ul65.apps.googleusercontent.com", "X_ld4kTka9MXhzJYSZjkKy7q",
 			"http://localhost:3000/auth/callback/google"),
 	)
-	r := newRoom(UseGravatar)
+	r := newRoom(UseFileSystemAvatar)
 	r.tracer = trace.New(os.Stdout)
 	//go the room going
 	go r.run()

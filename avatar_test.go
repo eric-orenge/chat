@@ -1,6 +1,11 @@
 package main
 
-import "testing"
+import (
+	"io/ioutil"
+	"os"
+	"path"
+	"testing"
+)
 
 type AuthAvatar struct{}
 
@@ -45,5 +50,21 @@ func TestAuthAvatar(t *testing.T) {
 		if url != testUrl {
 			t.Error("AuthAvatar.GetAvatarURL should return correct URL")
 		}
+	}
+}
+func TestFileSystemAvatar(t *testing.T) {
+	filename := path.Join("avatars", "abc.jpg")
+	ioutil.WriteFile(filename, []byte{}, 0777)
+	defer func() { os.Remove(filename) }()
+
+	var fileSystemAvatar FileSystemAvatar
+	client := new(client)
+	client.userData = map[string]interface{}{"userId": "abc"}
+	url, err := fileSystemAvatar.GetAvatarURL(client)
+	if err != nil {
+		t.Error("fileSystemAvatar.GetAvatarURL should not return and error")
+	}
+	if url != "/avatars/abc.jpg" {
+		t.Error("Invalid URL returned")
 	}
 }

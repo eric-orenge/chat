@@ -14,6 +14,8 @@ type GravatarAvatar struct{}
 
 var UseGravatar GravatarAvatar
 
+type FileSystemAvatar struct{}
+
 type Avatar interface {
 	GetAvatarURL(c *client) (string, error)
 }
@@ -26,6 +28,17 @@ func (_ GravatarAvatar) GetAvatarURL(c *client) (string, error) {
 			return fmt.Sprintf("//www.gravatar.com/avatar/%x", m.Sum(nil)), nil //append it to the hardcoded
 			// base URL
 
+		}
+	}
+	return "", ErrNoAvatarURL
+}
+
+var UseFileSystemAvatar FileSystemAvatar
+
+func (_ FileSystemAvatar) GetAvatarURL(c *client) (string, error) {
+	if userid, ok := c.userData["userid"]; ok {
+		if useridStr, ok := userid.(string); ok {
+			return "/avatars/" + useridStr + ".jpg", nil
 		}
 	}
 	return "", ErrNoAvatarURL
