@@ -9,8 +9,6 @@ The following features have been covered: Templates, Web sockets, OAuth2, Tracin
 > go get github.com/stretchr/gomniauth
 > go get github.com/stretchr/objx
 > go get github.com/gorilla/websocket
-
-
 ```
 ## OAuth2 keys:
 
@@ -27,7 +25,6 @@ gomniauth.WithProviders(
 		google.New("key", "secret",
 			"http://localhost:**portListen**/auth/callback/google"),
 	)
-
 ```
 To get OAuth2 configured, replace respective key and secret in above code `main.go`. Key and secret got from the Provider's developer console.
 
@@ -42,7 +39,11 @@ To get OAuth2 configured, replace respective key and secret in above code `main.
 Visit (http://localhost:3000/chat) to access application
 
 
-## Sample output if `r.tracer = trace.New(os.Stdout)`
+## Sample output 
+
+
+if `r.tracer = trace.New(os.Stdout)`
+
 
 ```
 > 2018/04/21 16:36:44 Starting to serve at :8000
