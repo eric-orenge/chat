@@ -38,30 +38,9 @@ To get OAuth2 configured, replace respective key and secret in above code `main.
 
 Visit (http://localhost:3000/chat) to access application
 
+## Nginx Configuration
+Getting `Is not web socket upgrade` then have to upgrade the connection headers. Serving via nginx therefore do as follows
 
-## Sample output 
-
-
-if `r.tracer = trace.New(os.Stdout)`
-
-
-```
-> 2018/04/21 16:36:44 Starting to serve at :8000
-> New client joined
-> New client left
-> New client joined
-> New client joined
-> Message received: Hi room
-> --Sent to client
-> --Sent to client
-> Message received: Hello eric. What are you coding?
-> --Sent to client
-> --Sent to client
-> New client left
-> New client left
-```
-
-## Getting `Is not web socket upgrade` then have to upgrade the connection headers. Serving via nginx therefore do as follows
 
 In **/etc/nginx/site-available/chat.conf** have the following as your nginx configuration file to upgrade connection header from http to socket.
 
@@ -87,6 +66,32 @@ upstream websocket {
 
 Change port listening at to appropriate port. 
 
+
+
+To reload nginx, run cmd `sudo systemctl reload nginx.service`
+
+
+## Sample output 
+
+
+if `r.tracer = trace.New(os.Stdout)` in `main.go`
+
+
+```
+> 2018/04/21 16:36:44 Starting to serve at :8000
+> New client joined
+> New client left
+> New client joined
+> New client joined
+> Message received: Hi room
+> --Sent to client
+> --Sent to client
+> Message received: Hello eric. What are you coding?
+> --Sent to client
+> --Sent to client
+> New client left
+> New client left
+```
 ## Required Resources
 - Go Programming Blueprints by Mat Ryer
 
