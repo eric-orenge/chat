@@ -54,7 +54,10 @@ func main() {
 		google.New("", "",
 			"http://localhost:3000/auth/callback/google"),
 	)
-	r := newRoom(UseFileSystemAvatar)
+
+	var avatars Avatar = TryAvatars{UseFileSystemAvatar, UseAuthAvatar, UseGravatar}
+
+	r := newRoom(avatars)
 	r.tracer = trace.New(os.Stdout)
 	//go the room going
 	go r.run()
